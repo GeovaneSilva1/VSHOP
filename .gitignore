@@ -1,0 +1,46 @@
+# Ignore diretório da build
+bin/
+obj/
+
+# Configurações do usuário do Visual Studio
+.vscode/
+.vscode/*
+
+# Arquivos gerados por usuário do Visual Studio
+*.user
+*.rsuser
+*.suo
+
+# Arquivos de backup do Visual Studio
+*.bak
+*.swp
+
+# Arquivo de configuração de build
+*.userosscache
+*.sln.docstates
+
+# Diretório das dependências NuGet
+**/packages/*
+# Somente se estiver usando um feed privado do NuGet
+*.nupkg
+# Bloqueio de pacote
+project.lock.json
+
+# Arquivos de log e depuração
+*.log
+.DS_Store
+*.txt
+
+# Arquivos do sistema operacional
+Thumbs.db
+ehthumbs.db
+.DS_Store
+*.orig
+
+# Arquivo de configuração de publish
+publish/
+
+# Configuração específica do projeto (usar com cautela)
+appsettings.Development.json
+appsettings.Production.json
+appsettings.json
