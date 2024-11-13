@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using VShop.ProdutoApi.Context;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +10,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+
 builder.Services.AddDbContext<AppDbContext>(option=>option.UseMySql(mySqlConnection,ServerVersion.AutoDetect(mySqlConnection)));
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 
