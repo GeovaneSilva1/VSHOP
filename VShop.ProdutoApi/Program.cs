@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using VShop.ProdutoApi.Context;
 using AutoMapper;
+using VShop.ProdutoApi.Repositorios;
+using VShop.ProdutoApi.Servicos;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,12 @@ var mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnecti
 builder.Services.AddDbContext<AppDbContext>(option=>option.UseMySql(mySqlConnection,ServerVersion.AutoDetect(mySqlConnection)));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
+builder.Services.AddScoped<IProdutoService, ProdutoService>();
+
 
 var app = builder.Build();
 
