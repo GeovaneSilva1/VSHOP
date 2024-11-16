@@ -85,7 +85,5 @@ namespace VShop.ProdutoApi.Controlers
             return Ok(categoriaDTO);
 
         }
-
-
     }
 }
