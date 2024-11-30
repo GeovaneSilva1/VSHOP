@@ -11,7 +11,7 @@ using VShop.ProdutoApi.Context;
 namespace VShop.ProdutoApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241111225459_Inicial")]
+    [Migration("20241130140344_Inicial")]
     partial class Inicial
     {
         /// <inheritdoc />

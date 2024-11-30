@@ -3,17 +3,25 @@ using VShop.ProdutoApi.Context;
 using AutoMapper;
 using VShop.ProdutoApi.Repositorios;
 using VShop.ProdutoApi.Servicos;
+using System.Text.Json.Serialization;
+using Microsoft.VisualBasic;
+using VShop.ProdutoApi;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.Extensions.Options;
+using MySqlConnector;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var mySqlConnection = builder.Configuration.GetConnectionString("DefaultConnection");
+//var mySqlConnection = builder.Configuration.GetConnectionString("localhost");
+var mySqlConnection = builder.Configuration.GetConnectionString("cloudaws");
 
-builder.Services.AddDbContext<AppDbContext>(option=>option.UseMySql(mySqlConnection,ServerVersion.AutoDetect(mySqlConnection)));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(mySqlConnection,ServerVersion.AutoDetect(mySqlConnection)));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -34,29 +42,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+app.UseAuthorization();
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+app.MapControllers();
 
 app.Run();
 
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+

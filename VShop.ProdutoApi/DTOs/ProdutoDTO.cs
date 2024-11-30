@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using VShop.ProdutoApi.Models;
 
@@ -28,7 +29,7 @@ namespace VShop.ProdutoApi.DTOs
         [Range(1,9999)]
         public long estoque {get;set;}
         public string? ImageUrl {get;set;}
-
+        [JsonIgnore]
         public Categoria? Categoria {get;set;}
         public int CategoriaId {get;set;}
 
