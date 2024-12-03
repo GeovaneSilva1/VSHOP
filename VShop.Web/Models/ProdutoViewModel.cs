@@ -7,6 +7,6 @@ namespace VShop.Web.Models
 {
     public class ProdutoViewModel
     {
-        
+        //continua
     }
 }
