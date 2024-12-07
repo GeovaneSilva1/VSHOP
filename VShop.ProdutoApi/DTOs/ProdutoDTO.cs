@@ -29,6 +29,8 @@ namespace VShop.ProdutoApi.DTOs
         [Range(1,9999)]
         public long estoque {get;set;}
         public string? ImageUrl {get;set;}
+        public string? CategoriaNome {get;set;}
+        
         [JsonIgnore]
         public Categoria? Categoria {get;set;}
         public int CategoriaId {get;set;}

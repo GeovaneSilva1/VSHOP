@@ -14,7 +14,11 @@ namespace VShop.ProdutoApi.DTOs.Mapeamentos
         public MappingProfile()
         {
             CreateMap<Categoria,CategoriaDTO>().ReverseMap();
-            CreateMap<Produto,ProdutoDTO>().ReverseMap();
+
+            CreateMap<ProdutoDTO,Produto>();
+
+            CreateMap<Produto,ProdutoDTO>()
+                .ForMember(x => x.CategoriaNome, opt => opt.MapFrom(src => src.Categoria.Nome));
         }
     }
 }
