@@ -20,12 +20,12 @@ namespace VShop.ProdutoApi.Repositorios
 
         public async Task<IEnumerable<Produto>> GetAll()
         {
-            return await _Context.Produtos.ToListAsync();
+            return await _Context.Produtos.Include(c => c.Categoria).ToListAsync();
         }
 
         public async Task<Produto> GetById(int id)
         {
-            return await _Context.Produtos.Where(p=> p.Id == id).FirstOrDefaultAsync();
+            return await _Context.Produtos.Include(c => c.Categoria).Where(p=> p.Id == id).FirstOrDefaultAsync();
         }
 
         public async Task<Produto> Create(Produto produto)
