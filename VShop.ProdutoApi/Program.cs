@@ -18,8 +18,8 @@ builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.Re
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//var mySqlConnection = builder.Configuration.GetConnectionString("localhost");
-var mySqlConnection = builder.Configuration.GetConnectionString("cloudaws");
+var mySqlConnection = builder.Configuration.GetConnectionString("localhost");
+//var mySqlConnection = builder.Configuration.GetConnectionString("cloudaws");
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(mySqlConnection,ServerVersion.AutoDetect(mySqlConnection)));
 
